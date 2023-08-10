@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,7 +11,27 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+      <h1><Link href="/">Hello nextjs!</Link></h1>
+      <ol>
+        <li>
+          <Link href="/read/1">
+          HTML
+          </Link>
+          </li>
+        <li>
+          <Link href="/read/2">
+          CSS
+          </Link>
+          </li>
+      </ol>
+        {children}
+        <ol>
+        <li><a href="/create">Create</a></li>
+        <li>Update</li>
+        <button>Delete</button>
+      </ol>
+        </body>
     </html>
   );
 }
