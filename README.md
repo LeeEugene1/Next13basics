@@ -6,15 +6,18 @@
 1. Build
 2. Single page applicatioin
 3. Server component vs Client component
+4. Cache
 5. context api 적용
 6. redux
 8. typescript -> 다른브랜치로
  
 * 샘플 백엔드 연동(json-server)
-watch옵션이 저장후에 자동으로 서버를 재시작해줌
+watch옵션이 저장후에 자동으로 서버를 재시작해줌, 데이터가 생성될때마다 id값을 자동으로 1씩 증가해줌
 ```
 npx json-server --port 9000 --watch db.json
 ```
+* 에러가 해결되지않을때는 .next파일 삭제후 재실행해보기
+```rm -rf .next```
 
 ## 배운내용 정리(핵심)
 ### 1. Build
@@ -32,3 +35,10 @@ a태그를 Link컴포넌트로 변경하면 싱글페이지어플리케이션가
 ### 3. Server component vs Client component
 CSR: 사용자 인터페이스, 사용자와 상호작용할때 필요(검색창, 버튼 등등) : "use client"; 선언필요. 
 SSR: 정보를 단순히 보여줄때(목록) : 리액트 hook을 사용하지않고 비동기통신으로만 구현. 용량이 적음, 서버끼리 위치가 가까우면 빠르게뜸, 서버사이드에서 랜더링끝내고 HTML에 포함하여 보여주기때문에 자바스크립트를 비활성화하더라도 보여줌
+
+### 4. CACHE
+* 캐시를 하는 이유: 성능향상과 cost를 줄이기 위함
+* fetch할때도 직전의 데이터를 캐시를하기때문에 cache를 지워야 업데이트 내용이 보임(https://nextjs.org/docs/app/building-your-application/caching)
+* { cache: 'no-store'}를 하거나 nextjs의 { next: { revalidate: 0 }(캐시생명주기)을 사용해서 캐시를 저장하지않음
+* router.refresh()로 서버컴포넌트 리랜더링으로 새로운 데이터를 가져오게함(단, 목록API는 캐시저장하지않은 상태)
+* 참고: nextjs revalidate
